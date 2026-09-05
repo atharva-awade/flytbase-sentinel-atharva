@@ -37,15 +37,21 @@ def main(data: Path = "data/sft", out: Path = "output/qwen3vl4b-sentinel-lora",
          base: str = "unsloth/Qwen3-VL-4B-Instruct", epochs: float = 1.0, lr: float = 1e-4, r: int = 16,
          batch: int = 1, grad_accum: int = 4, max_pixels: int = 384 * 28 * 28, min_pixels: int = 128 * 28 * 28,
          load_4bit: bool = True, export_gguf: bool = False, merge_fp16: bool = False, max_steps: int = -1):
-    import torch
-    from trl import SFTConfig, SFTTrainer
     from unsloth import FastVisionModel, is_bf16_supported
     from unsloth.trainer import UnslothVisionDataCollator
+    from trl import SFTConfig, SFTTrainer
+    import torch
 
     model, tok = FastVisionModel.from_pretrained(base, load_in_4bit=load_4bit, use_gradient_checkpointing="unsloth")
     # image token budget = the VRAM/latency dial
-    tok.image_processor.min_pixels = min_pixels
-    tok.image_processor.max_pixels = max_pixels
+    try:
+        tok.image_processor.min_pixels = min_pixels
+        tok.image_processor.max_pixels = max_pixels
+    except (AttributeError, TypeError):
+        pass
+    if hasattr(tok.image_processor, "size") and isinstance(tok.image_processor.size, dict):
+        tok.image_processor.size["min_pixels"] = min_pixels
+        tok.image_processor.size["max_pixels"] = max_pixels
     model = FastVisionModel.get_peft_model(
         model, finetune_vision_layers=False, finetune_language_layers=True,
         finetune_attention_modules=True, finetune_mlp_modules=True,
