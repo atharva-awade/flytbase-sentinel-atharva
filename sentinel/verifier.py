@@ -110,7 +110,7 @@ def disambiguate(ans: RawAnswer, questions: list[tuple[str, str]]) -> str:
     if c == "traffic_congestion" and (any_yes("vehicle_blocking_traffic") or any_yes("stalled_or_broken_down_vehicle")) \
             and not any_yes("traffic_congestion"):
         return "vehicle_blocking_traffic" if any_yes("vehicle_blocking_traffic") else "stalled_or_broken_down_vehicle"
-    if c in ("fighting_or_violence", "loitering_or_suspicious_presence") and yes.get(c) and not any_yes(c):
+    if c != "normal" and yes.get(c) and not any_yes(c):
         return "normal"
     # explicit normal evidence overrides a low-confidence anomaly
     if yes.get("normal") and all(yes["normal"]) and ans.confidence < 0.75:
