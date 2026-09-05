@@ -1,0 +1,29 @@
+[project]
+name = "sentinel-vad"
+version = "0.1.0"
+description = "SENTINEL — cascaded small-VLM real-time video anomaly detection (AHC / FlytBase hackathon)"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26", "scipy>=1.11", "opencv-python-headless>=4.9", "pillow>=10",
+  "pydantic>=2.6", "pyyaml>=6", "typer>=0.12", "rich>=13", "openai>=1.40",
+]
+
+[project.optional-dependencies]
+gate = ["torch>=2.3", "transformers>=4.50", "accelerate"]          # SigLIP2 gate
+serve = ["vllm>=0.10", "xgrammar"]                                  # verifier server (GPU)
+train = ["unsloth", "trl>=0.15", "peft", "bitsandbytes", "datasets"]  # LoRA (Kaggle/Modal)
+edge = ["onnx", "onnxruntime-gpu", "llama-cpp-python"]
+dev = ["pytest>=8", "playwright"]
+
+[project.scripts]
+sentinel = "sentinel.cli:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["sentinel*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

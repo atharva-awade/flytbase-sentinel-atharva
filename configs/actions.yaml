@@ -1,0 +1,12 @@
+# Responder actions per class (PLAN.md §5.7) — emitted as an extra (arena-ignored) field and shown in the HUD.
+traffic_accident: "Alert ambulance and traffic police; hold drone on station and stream to control room."
+fire: "Alert fire service; estimate plume drift and keep a safe standoff distance."
+smoke: "Alert fire service for verification; monitor for open flame; advise nearby traffic."
+waterlogging_or_flood: "Notify municipal drainage; push a road-closure advisory to navigation apps."
+stalled_or_broken_down_vehicle: "Dispatch tow / highway patrol; push a lane-hazard warning."
+vehicle_blocking_traffic: "Dispatch traffic police to clear the obstruction; issue a diversion advisory."
+wrong_way_driving: "Immediate police alert; track the vehicle and warn oncoming traffic."
+road_spill_or_debris: "Dispatch road maintenance; advise a lane closure until cleared."
+fighting_or_violence: "Police dispatch; keep recording as evidence from a safe altitude."
+loitering_or_suspicious_presence: "Flag to security; continue observation and escalate only if it persists."
+traffic_congestion: "Adjust signal timing; publish a traffic advisory; check for an upstream cause."

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENTINEL · Cascade HUD</title>
+<style>
+:root{--bg:#0b0f14;--panel:#121820;--line:#1f2a36;--ink:#e6edf3;--mute:#8b98a5;--acc:#4cc9f0;--hot:#ff6b35;--ok:#3ddc84;--warn:#ffd166;--vlm:#c77dff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 ui-sans-serif,system-ui,Inter,Segoe UI,Roboto,sans-serif}
+header{display:flex;align-items:center;gap:18px;padding:14px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0f151d,#0b0f14)}
+header h1{font-size:18px;margin:0;letter-spacing:.5px}header h1 span{color:var(--acc)}
+header .sub{color:var(--mute);font-size:12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:14px 22px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile .k{color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.8px}.tile .v{font-size:26px;font-weight:600;margin-top:2px}
+.tile .v small{font-size:12px;color:var(--mute);font-weight:400;margin-left:4px}
+main{display:grid;grid-template-columns:280px 1fr;gap:14px;padding:0 22px 22px}
+.list{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;max-height:70vh;overflow-y:auto}
+.row{display:flex;justify-content:space-between;padding:9px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+.row:hover,.row.sel{background:#182230}.row .id{font-weight:600}.row .lv{color:var(--mute);font-size:12px}
+.badge{font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--mute)}
+.badge.ev{border-color:var(--hot);color:var(--hot)}.badge.n{border-color:var(--ok);color:var(--ok)}
+.detail{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h3{margin:0 0 8px;font-size:13px;color:var(--mute);text-transform:uppercase;letter-spacing:.8px}
+svg{width:100%;display:block}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mute);flex-wrap:wrap;margin-top:6px}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.ev{display:grid;grid-template-columns:170px 1fr;gap:10px;padding:10px;border:1px solid var(--line);border-radius:8px;margin-top:8px;background:#0f151d}
+.ev .cls{font-weight:700;color:var(--hot)}.ev .t{color:var(--mute);font-size:12px}.ev .act{color:var(--warn);font-size:12px;margin-top:4px}
+.silent{padding:14px;border:1px dashed var(--line);border-radius:8px;color:var(--ok);margin-top:8px}
+.verd{font-size:12px;color:var(--mute);margin-top:6px}.verd b{color:var(--vlm)}
+input[type=file]{color:var(--mute)}
+.gauge{height:8px;background:#1a2330;border-radius:4px;overflow:hidden;margin-top:8px}.gauge i{display:block;height:100%;background:var(--acc)}
+</style></head><body>
+<header><h1><span>SENTINEL</span> · cascade HUD</h1><div class="sub">gate watches 100% · VLM wakes on demand · one interval per event · silence is a decision</div>
+<div style="margin-left:auto"><input type="file" id="file" accept=".json"> <span class="sub">load a *.trace.json</span></div></header>
+<div class="tiles" id="tiles"></div>
+<main><div class="list" id="list"></div><div class="detail" id="detail"><div class="card">Load a trace file (produced by <code>sentinel run</code>) or open <code>?trace=path.json</code>.</div></div></main>
+<script>
+const CLS_COLORS={traffic_accident:'#ff6b35',traffic_congestion:'#ffd166',stalled_or_broken_down_vehicle:'#f4a261',vehicle_blocking_traffic:'#e76f51',fire:'#ff4d4d',smoke:'#9aa5b1',waterlogging_or_flood:'#4cc9f0',wrong_way_driving:'#b5179e',road_spill_or_debris:'#c9ada7',fighting_or_violence:'#ef233c',loitering_or_suspicious_presence:'#c77dff'};
+let TRACE={},GT={};
+const q=new URLSearchParams(location.search);
+if(q.get('trace')) fetch(q.get('trace')).then(r=>r.json()).then(load);
+if(q.get('gt')) fetch(q.get('gt')).then(r=>r.text()).then(parseGT);
+document.getElementById('file').onchange=e=>{const f=e.target.files[0];const r=new FileReader();r.onload=()=>load(JSON.parse(r.result));r.readAsText(f)};
+function parseGT(csv){const [h,...rows]=csv.trim().split(/\r?\n/).map(l=>l.split(','));const i=Object.fromEntries(h.map((k,j)=>[k,j]));
+ rows.forEach(r=>{const v=r[i.video_id];(GT[v]=GT[v]||[]).push({cls:r[i.class_name],s:parseFloat(r[i.start_time_sec]),e:parseFloat(r[i.end_time_sec])})})}
+function load(t){TRACE=t;renderTiles();renderList();const first=Object.keys(t)[0];if(first)show(first)}
+function fmt(x,d=1){return (+x).toFixed(d)}
+function renderTiles(){const vs=Object.values(TRACE);const dur=vs.reduce((a,v)=>a+v.duration_sec,0),rt=vs.reduce((a,v)=>a+v.runtime_ms,0)/1000;
+ const wake=vs.filter(v=>v.level!=1);const wr=wake.length?wake.reduce((a,v)=>a+v.wake_ratio,0)/wake.length:0;
+ const nev=vs.reduce((a,v)=>a+v.events.length,0),calls=vs.reduce((a,v)=>a+v.verdicts.length,0);
+ const silent=vs.filter(v=>v.level!=1&&v.events.length==0).length;
+ document.getElementById('tiles').innerHTML=[
+ ['videos',vs.length,''],['footage',fmt(dur/60),'min'],['RTF',fmt(rt/Math.max(dur,1e-6),3),'× real-time'],
+ ['VLM wake ratio',fmt(wr*100,0),'% of seconds'],['VLM calls',calls,''],['events',nev,''],['silent L2/L3',silent,'videos']
+ ].map(([k,v,u])=>`<div class="tile"><div class="k">${k}</div><div class="v">${v}<small>${u}</small></div>${k=='VLM wake ratio'?`<div class="gauge"><i style="width:${wr*100}%"></i></div>`:''}</div>`).join('')}
+function renderList(){document.getElementById('list').innerHTML=Object.entries(TRACE).sort((a,b)=>a[1].level-b[1].level||a[0].localeCompare(b[0])).map(([id,v])=>
+ `<div class="row" id="row-${id}" onclick="show('${id}')"><div><div class="id">${id}</div><div class="lv">L${v.level} · ${fmt(v.duration_sec,0)}s · wake ${fmt(v.wake_ratio*100,0)}%</div></div>
+ <div>${v.events.length?`<span class="badge ev">${v.events.length} event${v.events.length>1?'s':''}</span>`:'<span class="badge n">silent</span>'}</div></div>`).join('')}
+function show(id){document.querySelectorAll('.row').forEach(r=>r.classList.remove('sel'));document.getElementById('row-'+id).classList.add('sel');
+ const v=TRACE[id],T=v.T,W=900,H=190,px=t=>t/T*W;
+ let s=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;
+ (v.windows||[]).forEach(([a,b])=>s+=`<rect x="${px(a)}" y="0" width="${px(b)-px(a)}" height="${H}" fill="#c77dff" opacity=".10"/>`);
+ s+=`<line x1="0" x2="${W}" y1="${H*0.5}" y2="${H*0.5}" stroke="#1f2a36" stroke-dasharray="3 4"/>`;
+ const path=(arr,col,w=1.5,op=1)=>{if(!arr||!arr.length)return'';let d='';arr.forEach((y,i)=>d+=(i?'L':'M')+px(i+0.5)+','+(H-8-y*(H-16)));return `<path d="${d}" fill="none" stroke="${col}" stroke-width="${w}" opacity="${op}"/>`};
+ s+=path(v.suspicion,'#4cc9f0',1.2,.9);Object.entries(v.curves||{}).forEach(([c,arr])=>s+=path(arr,CLS_COLORS[c]||'#fff',2.2));
+ (GT[id]||[]).filter(g=>!isNaN(g.s)).forEach(g=>s+=`<rect x="${px(g.s)}" y="${H-6}" width="${px(g.e)-px(g.s)}" height="5" fill="#3ddc84" opacity=".8"/>`);
+ v.events.filter(e=>e.start_time_sec!=null).forEach(e=>s+=`<rect x="${px(e.start_time_sec)}" y="1" width="${px(e.end_time_sec)-px(e.start_time_sec)}" height="5" fill="${CLS_COLORS[e.class_name]}"/>`);
+ s+=`</svg>`;
+ const gtTxt=(GT[id]||[]).map(g=>isNaN(g.s)?g.cls:`${g.cls} ${g.s}-${g.e}s`).join(', ');
+ const evs=v.events.length?v.events.map(e=>`<div class="ev"><div><div class="cls">${e.class_name}</div><div class="t">${e.start_time_sec!=null?`${fmt(e.start_time_sec)} → ${fmt(e.end_time_sec)} s`:'whole clip'} · conf ${e.confidence!=null?fmt(e.confidence,2):'–'}</div></div>
+  <div>${e.explanation||''}<div class="act">▶ ${e.responder_action||''}</div></div></div>`).join('')
+  :`<div class="silent">No event emitted — abstention. ${v.verdicts.length?v.verdicts.length+' VLM verdict(s) did not clear the confidence / consistency bar.':'Gate never exceeded τ; the VLM was never woken.'}</div>`;
+ const verd=v.verdicts.map(x=>`<div class="verd">[${fmt(x.start,0)}–${fmt(x.end,0)}s] <b>${x.class_name}</b> ${fmt(x.confidence,2)} — ${x.explanation||''}</div>`).join('');
+ document.getElementById('detail').innerHTML=`<div class="card"><h3>${id} · L${v.level} · ${fmt(v.duration_sec,0)}s · processed in ${fmt(v.runtime_ms/1000,1)}s (RTF ${fmt(v.runtime_ms/1000/v.duration_sec,3)}) · wake ${fmt(v.wake_ratio*100,0)}%</h3>${s}
+ <div class="legend"><span><i style="background:#4cc9f0"></i>gate suspicion u[t]</span><span><i style="background:#c77dff;opacity:.4"></i>VLM woken</span>${Object.keys(v.curves||{}).map(c=>`<span><i style="background:${CLS_COLORS[c]}"></i>${c}</span>`).join('')}<span><i style="background:#3ddc84"></i>ground truth</span><span>▬ top bar: emitted interval</span></div>
+ ${gtTxt?`<div class="verd">GT: ${gtTxt}</div>`:''}</div>
+ <div class="card"><h3>Decisions</h3>${evs}</div>
+ <div class="card"><h3>VLM verdicts (${v.verdicts.length})</h3>${verd||'<div class="verd">none — gate stayed quiet</div>'}</div>`}
+</script></body></html>

@@ -1,0 +1,39 @@
+# Fine-grained yes/no questions for the VLM verifier (ASK-HINT style; PLAN.md §5.3).
+# The verifier asks the 'always' questions plus the questions of the top-K classes suggested by the gate.
+always:
+  - "Is traffic moving normally for this kind of road, with no obstruction or incident?"
+  - "Is this scene ordinary and routine for the location shown?"
+classes:
+  traffic_accident:
+    - "Have two or more vehicles collided, or is a vehicle overturned, crushed or off the road?"
+    - "Is there visible crash damage, debris from a collision, or people gathered around a wrecked vehicle?"
+  traffic_congestion:
+    - "Are many vehicles stopped or crawling bumper-to-bumper across several lanes?"
+    - "Is the queue of slow vehicles long and continuous rather than a normal stop at a signal?"
+  stalled_or_broken_down_vehicle:
+    - "Is a single vehicle stationary on the roadway or shoulder while other traffic keeps moving past it?"
+    - "Does the stopped vehicle look disabled (hazard lights, hood open, people beside it, tow truck)?"
+  vehicle_blocking_traffic:
+    - "Is a stopped vehicle positioned so that other vehicles must queue behind it or swerve around it?"
+    - "Is a vehicle obstructing an intersection, crossing or live lane rather than parked at the side?"
+  fire:
+    - "Are open flames clearly visible?"
+    - "Is a vehicle, building or vegetation actively burning?"
+  smoke:
+    - "Is there a plume or cloud of smoke rising or drifting, without clearly visible flames?"
+    - "Is smoke reducing visibility over the road or area?"
+  waterlogging_or_flood:
+    - "Is the road or ground covered by standing or flowing water?"
+    - "Are vehicles or people wading through or stranded in water?"
+  wrong_way_driving:
+    - "Is any vehicle moving against the direction of the surrounding traffic?"
+    - "Is a vehicle heading into oncoming traffic on a one-way or divided road?"
+  road_spill_or_debris:
+    - "Are objects, cargo, rocks, or spilled material lying on the road surface?"
+    - "Are vehicles steering around something on the road?"
+  fighting_or_violence:
+    - "Are people physically fighting, hitting, kicking or grappling with each other?"
+    - "Is there an aggressive confrontation with people being pushed or knocked down?"
+  loitering_or_suspicious_presence:
+    - "Is a person or group lingering in one spot for a long time without an apparent purpose?"
+    - "Is someone present in a restricted, closed, or unusual place (utility site, fence line, track side) at an odd hour?"

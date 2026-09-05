@@ -1,0 +1,64 @@
+# SigLIP2 zero-shot text prompts per class (PLAN.md §5.2). Class embedding = mean of its prompts.
+# Three viewpoints are mixed on purpose: the data is drone + CCTV + dashcam.
+normal:
+  - "aerial view of traffic flowing smoothly on a highway"
+  - "drone view of a city street with cars driving normally"
+  - "CCTV footage of an ordinary intersection with moving traffic"
+  - "dashcam view of a road with normal traffic ahead"
+  - "cars parked neatly in a parking lot seen from above"
+  - "an empty quiet street at night with streetlights"
+  - "pedestrians walking normally on a sidewalk"
+  - "aerial view of a park with people walking"
+traffic_accident:
+  - "aerial view of a car crash with collided vehicles on the road"
+  - "two vehicles colliding at an intersection"
+  - "an overturned car on a highway after an accident"
+  - "motorcycle crash on the road with a rider on the ground"
+  - "dashcam footage of a vehicle collision ahead"
+  - "damaged vehicles and debris after a road accident seen from above"
+traffic_congestion:
+  - "aerial view of a traffic jam with many cars stopped bumper to bumper"
+  - "heavy traffic congestion on a highway, vehicles barely moving"
+  - "long queue of cars stuck at an intersection"
+  - "gridlocked city road full of stationary vehicles at night"
+stalled_or_broken_down_vehicle:
+  - "a single car stopped on the highway shoulder with hazard lights"
+  - "broken down truck stationary at the side of the road while traffic passes"
+  - "aerial view of a lone vehicle stopped in a live lane"
+  - "a car with its hood open stopped on the roadside"
+vehicle_blocking_traffic:
+  - "a vehicle stopped across lanes forcing other cars to swerve around it"
+  - "truck blocking an intersection with traffic queuing behind it"
+  - "aerial view of a car obstructing the road and other vehicles deviating around it"
+fire:
+  - "aerial view of a vehicle on fire with visible orange flames"
+  - "building on fire with flames and thick smoke seen from a drone"
+  - "burning car on the roadside with bright flames"
+  - "large fire with flames at night"
+smoke:
+  - "thick grey smoke rising from the roadside seen from above"
+  - "plume of dark smoke over a city street"
+  - "smoke drifting across a highway from a fire nearby"
+waterlogging_or_flood:
+  - "flooded road with cars driving through deep water"
+  - "aerial view of a waterlogged street after heavy rain"
+  - "vehicles stranded in floodwater on an urban road"
+  - "submerged road and standing water at an underpass"
+wrong_way_driving:
+  - "a car driving against the direction of traffic on a highway"
+  - "vehicle moving the wrong way on a one-way road"
+  - "aerial view of a motorcycle riding against oncoming traffic"
+road_spill_or_debris:
+  - "debris and scattered objects lying on the road"
+  - "cargo spilled from a truck across the highway"
+  - "aerial view of rocks or boxes obstructing a road lane"
+  - "oil or liquid spill on the road surface"
+fighting_or_violence:
+  - "people fighting on the street, punching and shoving"
+  - "a violent brawl between a group of people in public"
+  - "CCTV footage of an assault on a sidewalk"
+loitering_or_suspicious_presence:
+  - "a person lingering suspiciously near a fence at night"
+  - "someone standing alone for a long time by a closed building"
+  - "aerial view of a person wandering in a restricted utility area"
+  - "group loitering near parked vehicles at night"

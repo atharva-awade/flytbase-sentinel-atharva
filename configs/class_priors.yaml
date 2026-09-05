@@ -1,0 +1,32 @@
+# Temporal priors per class (PLAN.md §1.3, §5.5). scripts/derive_priors.py overwrites median_dur_sec
+# from train/*/ground_truth.csv; the rest are tuned on the public test split by scripts/sweep_thresholds.py.
+defaults:
+  tau_on: 0.60        # enter interval
+  tau_off: 0.35       # stay in interval
+  tau_video: 0.65     # video-level abstention: max evidence below this -> events: []
+  tau_l1: 0.55        # L1 label threshold
+  l3_gap_multiplier: 1.5
+shapes:
+  impulse:     {smooth_sec: 3, min_dur_sec: 2,  gap_merge_sec: 4,  extend_to_median: true}
+  ramp:        {smooth_sec: 7, min_dur_sec: 5,  gap_merge_sec: 15, extend_to_median: true}
+  dwell:       {smooth_sec: 5, min_dur_sec: 8,  gap_merge_sec: 10, extend_to_median: true}
+  trajectory:  {smooth_sec: 3, min_dur_sec: 2,  gap_merge_sec: 5,  extend_to_median: true}
+  static:      {smooth_sec: 7, min_dur_sec: 5,  gap_merge_sec: 20, extend_to_median: true}
+classes:
+  traffic_accident:                 {median_dur_sec: 12}
+  fighting_or_violence:             {median_dur_sec: 15}
+  traffic_congestion:               {median_dur_sec: 40}
+  waterlogging_or_flood:            {median_dur_sec: 40}
+  smoke:                            {median_dur_sec: 30}
+  fire:                             {median_dur_sec: 30}
+  stalled_or_broken_down_vehicle:   {median_dur_sec: 30}
+  vehicle_blocking_traffic:         {median_dur_sec: 25}
+  loitering_or_suspicious_presence: {median_dur_sec: 30}
+  wrong_way_driving:                {median_dur_sec: 8}
+  road_spill_or_debris:             {median_dur_sec: 35}
+# Known co-occurrences that may both be emitted if each has independent VLM votes
+co_occur:
+  - [fire, smoke]
+  - [traffic_accident, traffic_congestion]
+  - [stalled_or_broken_down_vehicle, traffic_congestion]
+  - [vehicle_blocking_traffic, traffic_congestion]

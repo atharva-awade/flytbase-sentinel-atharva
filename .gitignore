@@ -1,0 +1,15 @@
+data/
+!data/.gitkeep
+cache/
+banks/*.npy
+output/
+models/
+submissions/*.json
+submissions/*.txt
+dashboard/*.trace.json
+dashboard/*.csv
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.venv/
