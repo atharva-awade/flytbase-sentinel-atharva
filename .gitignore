@@ -1,5 +1,7 @@
-data/
-!data/.gitkeep
+data/train/
+data/test/
+data/uploads/
+data/private/
 cache/
 banks/*.npy
 output/
