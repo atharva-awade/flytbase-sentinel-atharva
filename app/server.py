@@ -16,6 +16,7 @@ import shutil
 import threading
 import time
 import uuid
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import cv2
@@ -38,7 +39,24 @@ if MOCK:
 UPLOADS = ROOT / "data" / "uploads"; UPLOADS.mkdir(parents=True, exist_ok=True)
 SAMPLES = ROOT / "data" / "samples"; SAMPLES.mkdir(parents=True, exist_ok=True)
 
-app = FastAPI(title="SENTINEL", version="0.2.0")
+_SHUTTING_DOWN = False
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    global _SHUTTING_DOWN
+    _SHUTTING_DOWN = False
+    yield
+    _SHUTTING_DOWN = True
+    for s in list(SESSIONS.values()):
+        try:
+            s.stop()
+        except Exception:
+            pass
+    SESSIONS.clear()
+
+
+app = FastAPI(title="SENTINEL", version="0.2.0", lifespan=lifespan)
 
 _models_lock = threading.Lock()
 _GATE = None
@@ -221,17 +239,19 @@ def export(sid: str, video_id: str | None = None, level: int | None = None):
 
 @app.get("/stream/{sid}.mjpg")
 async def mjpeg(sid: str):
-    s = SESSIONS[sid]
+    s = SESSIONS.get(sid)
+    if not s:
+        raise HTTPException(404, "session not found")
 
     async def gen():
         last = None
-        while sid in SESSIONS:
+        while sid in SESSIONS and not _SHUTTING_DOWN:
             if s.jpeg is not None and s.jpeg is not last:
                 last = s.jpeg
                 yield b"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: " + str(len(last)).encode() + b"\r\n\r\n" + last + b"\r\n"
             elif s.status in ("finished", "stopped", "error") and s.jpeg is last:
                 await asyncio.sleep(0.5)
-                if s.status == "error":
+                if s.status == "error" or _SHUTTING_DOWN:
                     break
             await asyncio.sleep(0.04)
     return StreamingResponse(gen(), media_type="multipart/x-mixed-replace; boundary=frame")
@@ -241,14 +261,21 @@ async def mjpeg(sid: str):
 async def ws(sock: WebSocket, sid: str):
     await sock.accept()
     try:
-        while sid in SESSIONS:
-            s = SESSIONS[sid]
+        while sid in SESSIONS and not _SHUTTING_DOWN:
+            s = SESSIONS.get(sid)
+            if not s:
+                break
             await sock.send_text(json.dumps(s.state or {"status": s.status, "error": s.error}))
             if s.status in ("finished", "stopped", "error") and s.state:
                 await asyncio.sleep(1.0)
             await asyncio.sleep(0.4)
-    except WebSocketDisconnect:
-        return
+    except (WebSocketDisconnect, asyncio.CancelledError):
+        pass
+    finally:
+        try:
+            await sock.close(code=1001, reason="Server reloading")
+        except Exception:
+            pass
 
 
 STATIC = Path(__file__).resolve().parent / "static"
