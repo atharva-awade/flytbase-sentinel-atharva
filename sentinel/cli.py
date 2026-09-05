@@ -61,9 +61,9 @@ def _load_entries(manifest: Path | None, gt: Path | None) -> list[ManifestEntry]
 
 def _progress(e, p, tr):
     evs = ", ".join(f"{x.class_name}[{x.start_time_sec}-{x.end_time_sec}]" if x.start_time_sec is not None else x.class_name
-                    for x in p.events) or "—"
+                    for x in p.events) or "-"
     rprint(f"L{e.level} [bold]{e.video_id}[/bold] {tr['duration_sec']:.0f}s wake={tr['wake_ratio']:.0%} "
-           f"rt={tr['runtime_ms']/1000:.1f}s  → {evs}")
+           f"rt={tr['runtime_ms']/1000:.1f}s -> {evs}")
 
 
 @app.command()

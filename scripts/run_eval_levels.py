@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Run SENTINEL on the official evaluation dataset with L1, L2, L3 subfolders.
 
@@ -8,6 +8,11 @@ Usage:
 import csv
 import sys
 from pathlib import Path
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 import typer
 from rich import print as rprint
 
@@ -16,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from sentinel.cli import load_config, _progress
 from sentinel.manifest import ManifestEntry
 from sentinel.pipeline import Pipeline
-from sentinel.schema import validate_file, is_acceptable
+from sentinel.validate import validate_file, is_acceptable
 
 app = typer.Typer(add_completion=False)
 
@@ -26,12 +31,20 @@ def main(
     eval_dir: Path = typer.Option(..., help="Path to evaluation folder containing L1, L2, L3"),
     out: Path = typer.Option("submissions/submission_final.json", help="Output submission JSON path"),
     config: Path = typer.Option("configs/default.yaml", help="Sentinel config path"),
-    submission_id: str = typer.Option("sentinel-ahc-eval-01", help="Submission ID")
+    submission_id: str = typer.Option("sentinel-ahc-eval-01", help="Submission ID"),
+    mock: bool = typer.Option(False, help="Force mock verifier")
 ):
     eval_path = Path(eval_dir)
     if not eval_path.exists():
         rprint(f"[red]Error: eval_dir '{eval_dir}' does not exist![/red]")
         raise typer.Exit(1)
+
+    # Check if nested inside a child folder (e.g. "Evaluation - Mirror 5")
+    if not (eval_path / "L1").exists() and not (eval_path / "l1").exists():
+        for sub in eval_path.iterdir():
+            if sub.is_dir() and ((sub / "L1").exists() or (sub / "l1").exists()):
+                eval_path = sub
+                break
 
     rprint(f"[bold green]Discovering evaluation dataset in:[/bold green] {eval_path}")
 
@@ -91,7 +104,7 @@ def main(
     rprint("Initializing SENTINEL pipeline...")
 
     cfg = load_config(config)
-    pipe = Pipeline(cfg)
+    pipe = Pipeline(cfg, mock=mock)
 
     rprint("[bold cyan]Processing videos through SENTINEL Cascade...[/bold cyan]")
     sub = pipe.run(entries, files, submission_id=submission_id, progress=_progress)

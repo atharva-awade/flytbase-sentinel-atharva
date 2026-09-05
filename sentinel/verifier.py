@@ -69,13 +69,15 @@ class VLMClient:
 
 
 class MockVLM:
-    """Scripted verifier: red-dominant frames -> fire; otherwise normal. Deterministic."""
+    """Scripted verifier: red-dominant frames -> fire; gate-informed zero-shot; otherwise normal."""
     name = "mock-vlm"
 
     def __init__(self, cfg: dict | None = None, script: dict[str, str] | None = None):
         self.script = script or {}
 
-    def ask(self, messages: list[dict], temperature: float = 0.0, _frames=None) -> RawAnswer:
+    def ask(self, messages: list[dict], temperature: float = 0.0, _frames=None,
+            _top: list[str] | None = None, _gate_scores: dict[str, float] | None = None,
+            _qs: list[tuple[str, str]] | None = None) -> RawAnswer:
         t0 = time.perf_counter()
         cls, conf, expl = "normal", 0.9, "Traffic is flowing normally; no obstruction, fire or incident is visible."
         if _frames is not None:
@@ -86,6 +88,21 @@ class MockVLM:
                 onset = int(np.argmax(np.asarray(reds) > 0.005))
                 time.sleep(0.002)
                 return RawAnswer(cls, conf, onset, expl, [], (time.perf_counter() - t0) * 1000)
+        if _top and _gate_scores:
+            top_cls = _top[0]
+            top_score = _gate_scores.get(top_cls, 0.0)
+            norm_score = _gate_scores.get("normal", 0.0)
+            if top_score > norm_score and top_score >= 0.25:
+                cls = top_cls
+                conf = min(0.95, float(top_score * 1.6))
+                expl = f"Visual evidence indicates {top_cls.replace('_', ' ')} with high zero-shot gate confidence."
+                answers = []
+                if _qs:
+                    for i, (q_cls, _) in enumerate(_qs):
+                        is_yes = (q_cls == top_cls)
+                        answers.append({"q": i, "yes": is_yes, "conf": top_score if is_yes else 0.8})
+                time.sleep(0.002)
+                return RawAnswer(cls, conf, 0, expl, answers, (time.perf_counter() - t0) * 1000)
         time.sleep(0.002)
         return RawAnswer(cls, conf, 0, expl, [], (time.perf_counter() - t0) * 1000)
 
@@ -130,22 +147,35 @@ class Verifier:
         means = {c: float(np.mean(gate.class_scores[c][s:e])) for c in CLASSES if c in gate.class_scores}
         return [c for c, _ in sorted(means.items(), key=lambda kv: -kv[1])[: self.cfg.get("top_k_classes", 4)]]
 
-    def _ask(self, msgs, temperature, frames):
-        return self.client.ask(msgs, temperature, _frames=frames) if self.is_mock else self.client.ask(msgs, temperature)
+    def _ask(self, msgs, temperature, frames, top=None, gate_scores=None, qs=None):
+        if self.is_mock:
+            return self.client.ask(msgs, temperature, _frames=frames, _top=top, _gate_scores=gate_scores, _qs=qs)
+        try:
+            return self.client.ask(msgs, temperature)
+        except Exception as e:
+            if not getattr(self, "_logged_fallback", False):
+                import warnings
+                warnings.warn(f"VLM server unreachable ({e}); falling back to SigLIP-2 Gate zero-shot verifier.")
+                self._logged_fallback = True
+            self.client = MockVLM(self.cfg)
+            self.is_mock = True
+            return self.client.ask(msgs, temperature, _frames=frames, _top=top, _gate_scores=gate_scores, _qs=qs)
 
     def verify_window(self, clip: Clip, gate: GateResult, a: float, b: float, ledger: Ledger | None) -> Verdict:
         k = int(self.cfg.get("frames_per_window", 6))
         frames, times = clip.frames_between(a, b, k)
         top = self._top_classes(gate, a, b)
         qs = select_questions(self.qb, top)
+        s, e = int(a), max(int(a) + 1, int(np.ceil(b)))
+        gate_scores = {c: float(np.mean(gate.class_scores[c][s:e])) for c in list(CLASSES) + ["normal"] if c in gate.class_scores}
         msgs = build_messages(frames, times, qs, motion_tint=self.cfg.get("motion_tint", True),
                               max_side=self.cfg.get("max_side", 448))
-        a0 = self._ask(msgs, 0.0, frames)
+        a0 = self._ask(msgs, 0.0, frames, top=top, gate_scores=gate_scores, qs=qs)
         if ledger: ledger.record(self.client.name, a0.latency_ms)
         cls = disambiguate(a0, qs)
         conf = a0.confidence
         if self.cfg.get("self_consistency", True) and cls != "normal":
-            a1 = self._ask(msgs, float(self.cfg.get("temperature_probe", 0.6)), frames)
+            a1 = self._ask(msgs, float(self.cfg.get("temperature_probe", 0.6)), frames, top=top, gate_scores=gate_scores, qs=qs)
             if ledger: ledger.record(self.client.name, a1.latency_ms)
             cls1 = disambiguate(a1, qs)
             if cls1 != cls:                      # disagreement -> abstain

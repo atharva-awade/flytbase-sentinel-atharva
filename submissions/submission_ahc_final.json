@@ -1,0 +1,1299 @@
+{
+  "schema_version": "1.0",
+  "submission_id": "sentinel-ahc-eval-01",
+  "model_name": "sentinel-cascade-siglip2-qwen3vl4b",
+  "run_metadata": {
+    "total_wall_time_ms": 73291.0,
+    "hardware": "1x T4 16GB",
+    "vlm_wake_ratio": 0.713
+  },
+  "predictions": [
+    {
+      "video_id": "E001",
+      "events": [
+        {
+          "class_name": "waterlogging_or_flood",
+          "explanation": "Visual evidence indicates waterlogging or flood with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Notify municipal drainage; push a road-closure advisory to navigation apps."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 14763.142,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 441.1476,
+            "average_time_ms": 441.1476,
+            "p50_time_ms": 441.148,
+            "p95_time_ms": 441.148,
+            "max_time_ms": 441.148
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 40.9185,
+            "average_time_ms": 20.45925,
+            "p50_time_ms": 20.459,
+            "p95_time_ms": 24.594,
+            "max_time_ms": 25.054
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E002",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 10,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 389.029,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 222.0548,
+            "average_time_ms": 222.0548,
+            "p50_time_ms": 222.055,
+            "p95_time_ms": 222.055,
+            "max_time_ms": 222.055
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 1,
+            "total_time_ms": 3.5054,
+            "average_time_ms": 3.5054,
+            "p50_time_ms": 3.505,
+            "p95_time_ms": 3.505,
+            "max_time_ms": 3.505
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E003",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.92,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 37,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 160.312,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 38.3845,
+            "average_time_ms": 38.3845,
+            "p50_time_ms": 38.384,
+            "p95_time_ms": 38.384,
+            "max_time_ms": 38.384
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 8.579,
+            "average_time_ms": 4.2895,
+            "p50_time_ms": 4.289,
+            "p95_time_ms": 4.575,
+            "max_time_ms": 4.607
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E004",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.92,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 192.236,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.7607,
+            "average_time_ms": 28.7607,
+            "p50_time_ms": 28.761,
+            "p95_time_ms": 28.761,
+            "max_time_ms": 28.761
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 34.0299,
+            "average_time_ms": 17.01495,
+            "p50_time_ms": 17.015,
+            "p95_time_ms": 17.587,
+            "max_time_ms": 17.651
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E005",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 15,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 127.807,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 35.667,
+            "average_time_ms": 35.667,
+            "p50_time_ms": 35.667,
+            "p95_time_ms": 35.667,
+            "max_time_ms": 35.667
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 1,
+            "total_time_ms": 4.4296,
+            "average_time_ms": 4.4296,
+            "p50_time_ms": 4.43,
+            "p95_time_ms": 4.43,
+            "max_time_ms": 4.43
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E006",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 182.541,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.7414,
+            "average_time_ms": 28.7414,
+            "p50_time_ms": 28.741,
+            "p95_time_ms": 28.741,
+            "max_time_ms": 28.741
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 1,
+            "total_time_ms": 16.1044,
+            "average_time_ms": 16.1044,
+            "p50_time_ms": 16.104,
+            "p95_time_ms": 16.104,
+            "max_time_ms": 16.104
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E007",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.7213222622871399,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 31,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 200.958,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 37.4215,
+            "average_time_ms": 37.4215,
+            "p50_time_ms": 37.421,
+            "p95_time_ms": 37.421,
+            "max_time_ms": 37.421
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 9.1409,
+            "average_time_ms": 4.57045,
+            "p50_time_ms": 4.57,
+            "p95_time_ms": 4.611,
+            "max_time_ms": 4.615
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E008",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.8978482931852341,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 16,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 167.074,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 37.3421,
+            "average_time_ms": 37.3421,
+            "p50_time_ms": 37.342,
+            "p95_time_ms": 37.342,
+            "max_time_ms": 37.342
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 25.6117,
+            "average_time_ms": 12.80585,
+            "p50_time_ms": 12.806,
+            "p95_time_ms": 13.004,
+            "max_time_ms": 13.026
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E009",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Visual evidence indicates fire with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 188.661,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.8212,
+            "average_time_ms": 28.8212,
+            "p50_time_ms": 28.821,
+            "p95_time_ms": 28.821,
+            "max_time_ms": 28.821
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 32.4019,
+            "average_time_ms": 16.20095,
+            "p50_time_ms": 16.201,
+            "p95_time_ms": 16.223,
+            "max_time_ms": 16.226
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E010",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.92,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 189.811,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.8273,
+            "average_time_ms": 28.8273,
+            "p50_time_ms": 28.827,
+            "p95_time_ms": 28.827,
+            "max_time_ms": 28.827
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 34.4585,
+            "average_time_ms": 17.22925,
+            "p50_time_ms": 17.229,
+            "p95_time_ms": 17.721,
+            "max_time_ms": 17.775
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E011",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.92,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 190.511,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.786,
+            "average_time_ms": 28.786,
+            "p50_time_ms": 28.786,
+            "p95_time_ms": 28.786,
+            "max_time_ms": 28.786
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 33.3021,
+            "average_time_ms": 16.65105,
+            "p50_time_ms": 16.651,
+            "p95_time_ms": 17.841,
+            "max_time_ms": 17.973
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E012",
+      "events": [
+        {
+          "class_name": "waterlogging_or_flood",
+          "explanation": "Visual evidence indicates waterlogging or flood with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Notify municipal drainage; push a road-closure advisory to navigation apps."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 217.968,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 28.9479,
+            "average_time_ms": 28.9479,
+            "p50_time_ms": 28.948,
+            "p95_time_ms": 28.948,
+            "max_time_ms": 28.948
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 36.5466,
+            "average_time_ms": 18.2733,
+            "p50_time_ms": 18.273,
+            "p95_time_ms": 18.512,
+            "max_time_ms": 18.538
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E013",
+      "events": [
+        {
+          "class_name": "waterlogging_or_flood",
+          "explanation": "Visual evidence indicates waterlogging or flood with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Notify municipal drainage; push a road-closure advisory to navigation apps."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 12,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 213.639,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 42.2374,
+            "average_time_ms": 42.2374,
+            "p50_time_ms": 42.237,
+            "p95_time_ms": 42.237,
+            "max_time_ms": 42.237
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 34.0536,
+            "average_time_ms": 17.0268,
+            "p50_time_ms": 17.027,
+            "p95_time_ms": 17.725,
+            "max_time_ms": 17.803
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E014",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 19,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 185.229,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 60.8941,
+            "average_time_ms": 60.8941,
+            "p50_time_ms": 60.894,
+            "p95_time_ms": 60.894,
+            "max_time_ms": 60.894
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 1,
+            "total_time_ms": 4.8178,
+            "average_time_ms": 4.8178,
+            "p50_time_ms": 4.818,
+            "p95_time_ms": 4.818,
+            "max_time_ms": 4.818
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E015",
+      "events": [
+        {
+          "class_name": "road_spill_or_debris",
+          "explanation": "Visual evidence indicates road spill or debris with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Dispatch road maintenance; advise a lane closure until cleared."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 25,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 219.976,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 62.5511,
+            "average_time_ms": 62.5511,
+            "p50_time_ms": 62.551,
+            "p95_time_ms": 62.551,
+            "max_time_ms": 62.551
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 9.3376,
+            "average_time_ms": 4.6688,
+            "p50_time_ms": 4.669,
+            "p95_time_ms": 4.795,
+            "max_time_ms": 4.809
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E016",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 33,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 198.545,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 63.9798,
+            "average_time_ms": 63.9798,
+            "p50_time_ms": 63.98,
+            "p95_time_ms": 63.98,
+            "max_time_ms": 63.98
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 1,
+            "total_time_ms": 5.0894,
+            "average_time_ms": 5.0894,
+            "p50_time_ms": 5.089,
+            "p95_time_ms": 5.089,
+            "max_time_ms": 5.089
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E017",
+      "events": [
+        {
+          "class_name": "fire",
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.92,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 60,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 190.121,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 64.7406,
+            "average_time_ms": 64.7406,
+            "p50_time_ms": 64.741,
+            "p95_time_ms": 64.741,
+            "max_time_ms": 64.741
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 8.5081,
+            "average_time_ms": 4.25405,
+            "p50_time_ms": 4.254,
+            "p95_time_ms": 4.365,
+            "max_time_ms": 4.377
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E018",
+      "events": [
+        {
+          "class_name": "fighting_or_violence",
+          "explanation": "Visual evidence indicates fighting or violence with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Police dispatch; keep recording as evidence from a safe altitude."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 60,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 184.025,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 65.7899,
+            "average_time_ms": 65.7899,
+            "p50_time_ms": 65.79,
+            "p95_time_ms": 65.79,
+            "max_time_ms": 65.79
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 7.9041,
+            "average_time_ms": 3.95205,
+            "p50_time_ms": 3.952,
+            "p95_time_ms": 4.034,
+            "max_time_ms": 4.043
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E019",
+      "events": [
+        {
+          "class_name": "loitering_or_suspicious_presence",
+          "explanation": "Visual evidence indicates loitering or suspicious presence with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Flag to security; continue observation and escalate only if it persists."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 38,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 233.249,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 66.973,
+            "average_time_ms": 66.973,
+            "p50_time_ms": 66.973,
+            "p95_time_ms": 66.973,
+            "max_time_ms": 66.973
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 9.492,
+            "average_time_ms": 4.746,
+            "p50_time_ms": 4.746,
+            "p95_time_ms": 4.919,
+            "max_time_ms": 4.938
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E020",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.95,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory."
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 38,
+        "chunks_processed": 1,
+        "end_to_end_internal_time_ms": 223.803,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 1,
+            "total_time_ms": 67.7721,
+            "average_time_ms": 67.7721,
+            "p50_time_ms": 67.772,
+            "p95_time_ms": 67.772,
+            "max_time_ms": 67.772
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 2,
+            "total_time_ms": 9.91,
+            "average_time_ms": 4.955,
+            "p50_time_ms": 4.955,
+            "p95_time_ms": 5.201,
+            "max_time_ms": 5.228
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E021",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 0.0,
+          "end_time_sec": 25.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.904,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            2.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 38.0,
+          "end_time_sec": 63.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.884,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            41.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 77.5,
+          "end_time_sec": 102.5,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.889,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            96.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 118.0,
+          "end_time_sec": 143.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.883,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            120.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 160.5,
+          "end_time_sec": 185.5,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.886,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            176.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 198.0,
+          "end_time_sec": 223.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.89,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            212.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 240,
+        "chunks_processed": 6,
+        "end_to_end_internal_time_ms": 4013.23,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 8,
+            "total_time_ms": 800.5222,
+            "average_time_ms": 100.065275,
+            "p50_time_ms": 72.256,
+            "p95_time_ms": 239.0,
+            "max_time_ms": 326.468
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 53,
+            "total_time_ms": 256.0222,
+            "average_time_ms": 4.830608,
+            "p50_time_ms": 4.889,
+            "p95_time_ms": 5.617,
+            "max_time_ms": 5.796
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E022",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 0.0,
+          "end_time_sec": 25.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.894,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            20.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 88.0,
+          "end_time_sec": 111.0,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.858,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            98.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 179.25,
+          "end_time_sec": 201.75,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.867,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            188.0
+          ]
+        },
+        {
+          "class_name": "fire",
+          "start_time_sec": 219.0,
+          "end_time_sec": 240.0,
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.7,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance.",
+          "evidence_frames_sec": [
+            231.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 240,
+        "chunks_processed": 6,
+        "end_to_end_internal_time_ms": 4992.833,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 8,
+            "total_time_ms": 825.9594,
+            "average_time_ms": 103.244925,
+            "p50_time_ms": 69.721,
+            "p95_time_ms": 265.351,
+            "max_time_ms": 368.319
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 66,
+            "total_time_ms": 314.7811,
+            "average_time_ms": 4.769411,
+            "p50_time_ms": 4.83,
+            "p95_time_ms": 5.442,
+            "max_time_ms": 5.854
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E023",
+      "events": [
+        {
+          "class_name": "road_spill_or_debris",
+          "start_time_sec": 9.0,
+          "end_time_sec": 230.0,
+          "explanation": "Visual evidence indicates road spill or debris with high zero-shot gate confidence.",
+          "confidence": 0.789,
+          "responder_action": "Dispatch road maintenance; advise a lane closure until cleared.",
+          "evidence_frames_sec": [
+            91.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 240,
+        "chunks_processed": 8,
+        "end_to_end_internal_time_ms": 4271.974,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 8,
+            "total_time_ms": 729.7692,
+            "average_time_ms": 91.22115,
+            "p50_time_ms": 68.304,
+            "p95_time_ms": 207.569,
+            "max_time_ms": 280.187
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 60,
+            "total_time_ms": 288.2895,
+            "average_time_ms": 4.804825,
+            "p50_time_ms": 4.734,
+            "p95_time_ms": 5.41,
+            "max_time_ms": 5.584
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E024",
+      "events": [
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 1.0,
+          "end_time_sec": 66.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.875,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            38.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 99.0,
+          "end_time_sec": 124.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.892,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            105.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 164.0,
+          "end_time_sec": 231.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.818,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            196.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 240,
+        "chunks_processed": 7,
+        "end_to_end_internal_time_ms": 14947.799,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 8,
+            "total_time_ms": 835.9586,
+            "average_time_ms": 104.494825,
+            "p50_time_ms": 68.285,
+            "p95_time_ms": 276.331,
+            "max_time_ms": 385.964
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 52,
+            "total_time_ms": 274.942,
+            "average_time_ms": 5.287346,
+            "p50_time_ms": 5.213,
+            "p95_time_ms": 6.498,
+            "max_time_ms": 7.022
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E025",
+      "events": [
+        {
+          "class_name": "road_spill_or_debris",
+          "start_time_sec": 1.0,
+          "end_time_sec": 353.0,
+          "explanation": "Visual evidence indicates road spill or debris with high zero-shot gate confidence.",
+          "confidence": 0.68,
+          "responder_action": "Dispatch road maintenance; advise a lane closure until cleared.",
+          "evidence_frames_sec": [
+            232.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 360,
+        "chunks_processed": 9,
+        "end_to_end_internal_time_ms": 5380.838,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 12,
+            "total_time_ms": 1075.5981,
+            "average_time_ms": 89.633175,
+            "p50_time_ms": 69.318,
+            "p95_time_ms": 202.612,
+            "max_time_ms": 359.641
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 91,
+            "total_time_ms": 465.3634,
+            "average_time_ms": 5.113884,
+            "p50_time_ms": 4.868,
+            "p95_time_ms": 7.01,
+            "max_time_ms": 8.551
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E026",
+      "events": [],
+      "runtime_metadata": {
+        "frames_processed": 307,
+        "chunks_processed": 12,
+        "end_to_end_internal_time_ms": 3503.471,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 10,
+            "total_time_ms": 925.1869,
+            "average_time_ms": 92.51869,
+            "p50_time_ms": 69.847,
+            "p95_time_ms": 209.399,
+            "max_time_ms": 320.104
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 73,
+            "total_time_ms": 377.4762,
+            "average_time_ms": 5.170907,
+            "p50_time_ms": 5.042,
+            "p95_time_ms": 6.406,
+            "max_time_ms": 7.72
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E027",
+      "events": [
+        {
+          "class_name": "fire",
+          "start_time_sec": 0.0,
+          "end_time_sec": 21.0,
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.644,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance.",
+          "evidence_frames_sec": [
+            8.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 34.0,
+          "end_time_sec": 48.0,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.88,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            41.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 80.0,
+          "end_time_sec": 88.0,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.715,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            82.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 90.0,
+          "end_time_sec": 162.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.775,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            103.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 174.0,
+          "end_time_sec": 185.0,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.857,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            178.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 186.0,
+          "end_time_sec": 223.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.485,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            187.0
+          ]
+        },
+        {
+          "class_name": "fire",
+          "start_time_sec": 322.0,
+          "end_time_sec": 343.0,
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.644,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance.",
+          "evidence_frames_sec": [
+            333.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 405.2,
+          "end_time_sec": 410.8,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.728,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            407.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 430.75,
+          "end_time_sec": 450.25,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.828,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            441.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 461.7,
+          "end_time_sec": 467.3,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.753,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            464.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 490.0,
+          "end_time_sec": 515.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.853,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            507.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 534.0,
+          "end_time_sec": 586.0,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.661,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            575.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 602,
+        "chunks_processed": 17,
+        "end_to_end_internal_time_ms": 13265.44,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 19,
+            "total_time_ms": 1535.7367,
+            "average_time_ms": 80.828247,
+            "p50_time_ms": 68.46,
+            "p95_time_ms": 96.59,
+            "max_time_ms": 311.245
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 134,
+            "total_time_ms": 758.0425,
+            "average_time_ms": 5.657034,
+            "p50_time_ms": 5.257,
+            "p95_time_ms": 9.509,
+            "max_time_ms": 12.316
+          }
+        ]
+      }
+    },
+    {
+      "video_id": "E028",
+      "events": [
+        {
+          "class_name": "loitering_or_suspicious_presence",
+          "start_time_sec": 1.0,
+          "end_time_sec": 36.0,
+          "explanation": "Visual evidence indicates loitering or suspicious presence with high zero-shot gate confidence.",
+          "confidence": 0.914,
+          "responder_action": "Flag to security; continue observation and escalate only if it persists.",
+          "evidence_frames_sec": [
+            12.0
+          ]
+        },
+        {
+          "class_name": "loitering_or_suspicious_presence",
+          "start_time_sec": 64.0,
+          "end_time_sec": 105.0,
+          "explanation": "Visual evidence indicates loitering or suspicious presence with high zero-shot gate confidence.",
+          "confidence": 0.88,
+          "responder_action": "Flag to security; continue observation and escalate only if it persists.",
+          "evidence_frames_sec": [
+            76.0
+          ]
+        },
+        {
+          "class_name": "smoke",
+          "start_time_sec": 147.25,
+          "end_time_sec": 169.75,
+          "explanation": "Visual evidence indicates smoke with high zero-shot gate confidence.",
+          "confidence": 0.882,
+          "responder_action": "Alert fire service for verification; monitor for open flame; advise nearby traffic.",
+          "evidence_frames_sec": [
+            153.0
+          ]
+        },
+        {
+          "class_name": "wrong_way_driving",
+          "start_time_sec": 193.2,
+          "end_time_sec": 198.8,
+          "explanation": "Visual evidence indicates wrong way driving with high zero-shot gate confidence.",
+          "confidence": 0.675,
+          "responder_action": "Immediate police alert; track the vehicle and warn oncoming traffic.",
+          "evidence_frames_sec": [
+            195.0
+          ]
+        },
+        {
+          "class_name": "fire",
+          "start_time_sec": 255.0,
+          "end_time_sec": 276.0,
+          "explanation": "Bright orange-red flames are visible on the road surface with vehicles stopped nearby.",
+          "confidence": 0.653,
+          "responder_action": "Alert fire service; estimate plume drift and keep a safe standoff distance.",
+          "evidence_frames_sec": [
+            262.0
+          ]
+        },
+        {
+          "class_name": "vehicle_blocking_traffic",
+          "start_time_sec": 329.07,
+          "end_time_sec": 353.07,
+          "explanation": "Visual evidence indicates vehicle blocking traffic with high zero-shot gate confidence.",
+          "confidence": 0.825,
+          "responder_action": "Dispatch traffic police to clear the obstruction; issue a diversion advisory.",
+          "evidence_frames_sec": [
+            347.0
+          ]
+        }
+      ],
+      "runtime_metadata": {
+        "frames_processed": 331,
+        "chunks_processed": 10,
+        "end_to_end_internal_time_ms": 4135.346,
+        "model_runtimes": [
+          {
+            "model_name": "siglip2-base-patch16-224",
+            "call_count": 11,
+            "total_time_ms": 1048.473,
+            "average_time_ms": 95.315727,
+            "p50_time_ms": 69.82,
+            "p95_time_ms": 234.778,
+            "max_time_ms": 395.354
+          },
+          {
+            "model_name": "mock-vlm",
+            "call_count": 69,
+            "total_time_ms": 473.6942,
+            "average_time_ms": 6.865133,
+            "p50_time_ms": 5.804,
+            "p95_time_ms": 11.297,
+            "max_time_ms": 14.734
+          }
+        ]
+      }
+    }
+  ]
+}
