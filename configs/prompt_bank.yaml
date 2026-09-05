@@ -9,6 +9,10 @@ normal:
   - "an empty quiet street at night with streetlights"
   - "pedestrians walking normally on a sidewalk"
   - "aerial view of a park with people walking"
+  - "people playing basketball or outdoor sports on a court"
+  - "players running, jumping and passing a ball in an athletic game"
+  - "recreational athletic activity, people playing a sports match in a park or court"
+  - "ordinary outdoor recreation, sports game, or playground activity"
 traffic_accident:
   - "aerial view of a car crash with collided vehicles on the road"
   - "two vehicles colliding at an intersection"
@@ -54,9 +58,10 @@ road_spill_or_debris:
   - "aerial view of rocks or boxes obstructing a road lane"
   - "oil or liquid spill on the road surface"
 fighting_or_violence:
-  - "people fighting on the street, punching and shoving"
-  - "a violent brawl between a group of people in public"
-  - "CCTV footage of an assault on a sidewalk"
+  - "people violently fighting on the street, punching, striking and kicking each other"
+  - "a violent physical brawl or street brawl between individuals striking each other"
+  - "CCTV footage of an aggressive physical assault, beating or violent fight on a sidewalk"
+  - "people violently attacking and wrestling each other aggressively in public"
 loitering_or_suspicious_presence:
   - "a person lingering suspiciously near a fence at night"
   - "someone standing alone for a long time by a closed building"

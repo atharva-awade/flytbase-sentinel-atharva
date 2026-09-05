@@ -189,13 +189,18 @@ class SigLIP2Gate(_BaseGate):
                             self.torch.cuda.synchronize()
                 else:
                     e = self.model.get_image_features(**batch)
+                if hasattr(e, "pooler_output") and e.pooler_output is not None:
+                    e = e.pooler_output
                 out.append(e.float().cpu().numpy())
         return np.concatenate(out) if out else np.zeros((0, 768), np.float32)
 
     def embed_texts(self, texts):
         with self.torch.no_grad():
             batch = self.proc(text=texts, padding="max_length", max_length=64, return_tensors="pt").to(self.device)
-            return self.model.get_text_features(**batch).float().cpu().numpy()
+            e = self.model.get_text_features(**batch)
+            if hasattr(e, "pooler_output") and e.pooler_output is not None:
+                e = e.pooler_output
+            return e.float().cpu().numpy()
 
 
 class MockGate(_BaseGate):
